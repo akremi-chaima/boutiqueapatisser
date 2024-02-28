@@ -2,8 +2,6 @@
 
 namespace App\Controller\User;
 
-use App\Manager\PastryManager;
-use App\Manager\PictureManager;
 use App\Manager\UserManager;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

@@ -3,11 +3,13 @@
 namespace App\Controller\Pastry;
 
 use App\DTO\Pastry\UpdatePastryDTO;
+use App\Entity\Pastry;
 use App\Manager\CategoryManager;
 use App\Manager\FlavourManager;
 use App\Manager\PastryManager;
 use App\Manager\SubCollectionManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -64,14 +66,14 @@ class UpdatePastryController extends AbstractController
     /**
      * Update pastry
      *
-     * @Route("/api/update/pastry", methods={"PUT"})
+     * @Route("/api/update/pastry", methods={"POST"})
      *
      * @OA\Tag(name="Pastries")
      *
      * * @OA\RequestBody(
      *     required=true,
      *     @OA\MediaType(
-     *          mediaType="application/json",
+     *          mediaType="multipart/form-data",
      *          @OA\Schema(
      *              required={"id", "name", "price", "descripion", "isVisible", "categoryId", "subCollectionId", "flavourId"},
      *              @OA\Property(property="id", type="integer"),
@@ -82,6 +84,7 @@ class UpdatePastryController extends AbstractController
      *              @OA\Property(property="categoryId", type="integer"),
      *              @OA\Property(property="subCollectionId", type="integer"),
      *              @OA\Property(property="flavourId", type="integer"),
+     *              @OA\Property(property="file", type="file"),
      *
      *          )
      *      )
@@ -94,8 +97,11 @@ class UpdatePastryController extends AbstractController
      */
     public function __invoke(Request $request): JsonResponse
     {
+        /** @var UploadedFile|null $file */
+        $file = $request->files->get('file');
+
         /** @var UpdatePastryDTO $dto */
-        $dto = $this->serializer->deserialize($request->getContent(), UpdatePastryDTO::class, 'json');
+        $dto = $this->serializer->deserialize(json_encode($request->request->all()), UpdatePastryDTO::class, 'json');
 
         $errors = $this->validator->validate($dto);
 
@@ -122,9 +128,15 @@ class UpdatePastryController extends AbstractController
             return new JsonResponse(['error_message' => 'The subCollection is not found'], Response::HTTP_BAD_REQUEST);
         }
 
+        /** @var Pastry|null $pastry */
         $pastry = $this->pastryManager->findOneBy(['id' => $dto->getId()]);
         if (is_null($pastry)) {
             return new JsonResponse(['error_message' => 'The pastry is not found'], Response::HTTP_BAD_REQUEST);
+        }
+
+        $destination = $this->getParameter('kernel.project_dir').'/public/uploads/'.$pastry->getId();
+        if (!empty($file) && file_exists($destination.'/'.$pastry->getPicture())) {
+            unlink($destination.'/'.$file->getClientOriginalName());
         }
 
         $pastry->setName($dto->getName())
@@ -133,9 +145,15 @@ class UpdatePastryController extends AbstractController
             ->setIsVisible($dto->getIsVisible())
             ->setCategory($category)
             ->setSubCollection($subCollection)
-            ->setFlavour($flavour);
+            ->setFlavour($flavour)
+            ->setPicture(!is_null($file) ? $file->getClientOriginalName() : null);
 
         $this->pastryManager->save($pastry);
+
+        if (!empty($file)) {
+            $file->move($destination, $file->getClientOriginalName());
+        }
+
         return new JsonResponse(['message' => 'OK'], Response::HTTP_OK);
     }
 

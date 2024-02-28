@@ -4,7 +4,6 @@ namespace App\Serializer\Pastry;
 use App\Entity\Pastry;
 use App\Serializer\Category\CategoryNormalizer;
 use App\Serializer\Flavour\FlavourNormalizer;
-use App\Serializer\Picture\PictureNormalizer;
 use App\Serializer\SubCollection\SubCollectionNormalizer;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
@@ -21,20 +20,15 @@ class PastryNormalizer  implements NormalizerInterface
     /** @var CategoryNormalizer $categoryNormalizer */
     private $categoryNormalizer;
 
-    /** @var PictureNormalizer $pictureNormalizer*/
-    private $pictureNormalizer;
-
     public function __construct(
         SubCollectionNormalizer $subCollectionNormalizer,
         FlavourNormalizer $flavourNormalizer,
         CategoryNormalizer $categoryNormalizer,
-        PictureNormalizer $pictureNormalizer,
     )
     {
         $this->subCollectionNormalizer = $subCollectionNormalizer;
         $this->flavourNormalizer = $flavourNormalizer;
         $this->categoryNormalizer = $categoryNormalizer;
-        $this->pictureNormalizer = $pictureNormalizer;
     }
 
     /**
@@ -54,7 +48,7 @@ class PastryNormalizer  implements NormalizerInterface
             'flavour' => $this->flavourNormalizer->normalize($pastry->getFlavour()),
             'category' => $this->categoryNormalizer->normalize($pastry->getCategory()),
             'subCollection' => $this->subCollectionNormalizer->normalize($pastry->getSubCollection()),
-            'pictures' => $pastry->getPicture(),
+            'picture' => $pastry->getPicture(),
         ];
     }
 

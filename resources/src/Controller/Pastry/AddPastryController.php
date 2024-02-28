@@ -9,6 +9,7 @@ use App\Manager\FlavourManager;
 use App\Manager\PastryManager;
 use App\Manager\SubCollectionManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -72,7 +73,7 @@ class AddPastryController extends AbstractController
      * * @OA\RequestBody(
      *     required=true,
      *     @OA\MediaType(
-     *          mediaType="application/json",
+     *          mediaType="multipart/form-data",
      *          @OA\Schema(
      *              required={"name", "price", "descripion", "isVisible", "categoryId", "subCollectionId", "flavourId"},
      *              @OA\Property(property="name", type="string"),
@@ -82,6 +83,7 @@ class AddPastryController extends AbstractController
      *              @OA\Property(property="categoryId", type="integer"),
      *              @OA\Property(property="subCollectionId", type="integer"),
      *              @OA\Property(property="flavourId", type="integer"),
+     *              @OA\Property(property="file", type="file"),
      *
      *          )
      *      )
@@ -94,8 +96,11 @@ class AddPastryController extends AbstractController
      */
     public function __invoke(Request $request): JsonResponse
     {
+        /** @var UploadedFile|null $file */
+        $file = $request->files->get('file');
+
         /** @var AddPastryDTO $dto */
-        $dto = $this->serializer->deserialize($request->getContent(), AddPastryDTO::class, 'json');
+        $dto = $this->serializer->deserialize(json_encode($request->request->all()), AddPastryDTO::class, 'json');
 
         $errors = $this->validator->validate($dto);
 
@@ -125,7 +130,6 @@ class AddPastryController extends AbstractController
             return new JsonResponse(['error_message' => 'The subCollection is not found'], Response::HTTP_BAD_REQUEST);
         }
 
-
         $pastry = (new Pastry())
             ->setName($dto->getName())
             ->setPrice($dto->getPrice())
@@ -133,9 +137,16 @@ class AddPastryController extends AbstractController
             ->setIsVisible($dto->getIsVisible())
             ->setCategory($category)
             ->setSubCollection($subCollection)
-            ->setFlavour($flavour);
+            ->setFlavour($flavour)
+            ->setPicture(!is_null($file) ? $file->getClientOriginalName() : null);
 
         $this->pastryManager->save($pastry);
+
+        if (!is_null($file)) {
+            $destination = $this->getParameter('kernel.project_dir').'/public/uploads/'.$pastry->getId();
+            $file->move($destination, $file->getClientOriginalName());
+        }
+
         return new JsonResponse(['message' => 'OK'], Response::HTTP_OK);
     }
 

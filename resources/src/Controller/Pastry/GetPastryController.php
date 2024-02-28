@@ -3,7 +3,6 @@
 namespace App\Controller\Pastry;
 
 use App\Manager\PastryManager;
-use App\Manager\PictureManager;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
