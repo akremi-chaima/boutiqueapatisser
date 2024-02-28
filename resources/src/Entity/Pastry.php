@@ -42,6 +42,13 @@ class Pastry
     private $description;
 
     /**
+     * @var string|null
+     *
+     * @ORM\Column(name="picture", type="string", length=100, nullable=true)
+     */
+    private $picture;
+
+    /**
      * @var bool
      *
      * @ORM\Column(name="is_visible", type="boolean", nullable=false)
@@ -209,6 +216,24 @@ class Pastry
     public function setSubCollection(SubCollection $subCollection): Pastry
     {
         $this->subCollection = $subCollection;
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getPicture(): ?string
+    {
+        return $this->picture;
+    }
+
+    /**
+     * @param string|null $picture
+     * @return Pastry
+     */
+    public function setPicture(?string $picture): Pastry
+    {
+        $this->picture = $picture;
         return $this;
     }
 }

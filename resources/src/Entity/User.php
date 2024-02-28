@@ -49,6 +49,13 @@ class User
     private $email;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="phone_number", type="string", length=10, nullable=false)
+     */
+    private $phoneNumber;
+
+    /**
      * @var Role
      *
      * @ORM\ManyToOne(targetEntity="Role")
@@ -153,6 +160,24 @@ class User
     public function setRole(Role $role): User
     {
         $this->role = $role;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPhoneNumber(): string
+    {
+        return $this->phoneNumber;
+    }
+
+    /**
+     * @param string $phoneNumber
+     * @return User
+     */
+    public function setPhoneNumber(string $phoneNumber): User
+    {
+        $this->phoneNumber = $phoneNumber;
         return $this;
     }
 }

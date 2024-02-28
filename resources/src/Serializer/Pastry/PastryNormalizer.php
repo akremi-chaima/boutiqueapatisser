@@ -2,7 +2,6 @@
 namespace App\Serializer\Pastry;
 
 use App\Entity\Pastry;
-use App\Manager\PictureManager;
 use App\Serializer\Category\CategoryNormalizer;
 use App\Serializer\Flavour\FlavourNormalizer;
 use App\Serializer\Picture\PictureNormalizer;
@@ -25,22 +24,17 @@ class PastryNormalizer  implements NormalizerInterface
     /** @var PictureNormalizer $pictureNormalizer*/
     private $pictureNormalizer;
 
-    /** @var PictureManager $pictureManager*/
-    private $pictureManager;
-
     public function __construct(
         SubCollectionNormalizer $subCollectionNormalizer,
         FlavourNormalizer $flavourNormalizer,
         CategoryNormalizer $categoryNormalizer,
         PictureNormalizer $pictureNormalizer,
-        PictureManager $pictureManager
     )
     {
         $this->subCollectionNormalizer = $subCollectionNormalizer;
         $this->flavourNormalizer = $flavourNormalizer;
         $this->categoryNormalizer = $categoryNormalizer;
         $this->pictureNormalizer = $pictureNormalizer;
-        $this->pictureManager = $pictureManager;
     }
 
     /**
@@ -51,11 +45,6 @@ class PastryNormalizer  implements NormalizerInterface
      */
     public function normalize($pastry, string $format = null, array $context = [])
     {
-        $picturesList = $this->pictureManager->findBy(['pastry' => $pastry]);
-        $pictures = [];
-        foreach ($picturesList as $picture) {
-            $pictures[] = $this->pictureNormalizer->normalize($picture);
-        }
         return [
             'id' => $pastry->getId(),
             'name' => $pastry->getName(),
@@ -65,7 +54,7 @@ class PastryNormalizer  implements NormalizerInterface
             'flavour' => $this->flavourNormalizer->normalize($pastry->getFlavour()),
             'category' => $this->categoryNormalizer->normalize($pastry->getCategory()),
             'subCollection' => $this->subCollectionNormalizer->normalize($pastry->getSubCollection()),
-            'pictures' => $pictures,
+            'pictures' => $pastry->getPicture(),
         ];
     }
 

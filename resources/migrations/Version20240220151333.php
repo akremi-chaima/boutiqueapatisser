@@ -23,6 +23,7 @@ final class Version20240220151333 extends AbstractMigration
             CREATE TABLE `pastry` (
                 `id` INT NOT NULL AUTO_INCREMENT,
                 `name` VARCHAR(60) NOT NULL,
+                `picture` VARCHAR(100) NULL,
                 `price` DECIMAL(10,2) NOT NULL,
                 `description` longtext NOT NULL,
                 `is_visible` TINYINT NOT NULL ,

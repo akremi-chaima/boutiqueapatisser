@@ -24,6 +24,7 @@ final class Version20240220152230 extends AbstractMigration
                 `id` INT NOT NULL AUTO_INCREMENT,
                 `first_name` VARCHAR(45) NOT NULL,
                 `last_name` VARCHAR(45) NOT NULL,
+                `phone_number` VARCHAR(10) NOT NULL,
                 `password` VARCHAR(45) NOT NULL,
                 `email` VARCHAR(100) NOT NULL,
                 `role_id` INT NOT NULL,

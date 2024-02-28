@@ -23,6 +23,7 @@ class PastryFixtures extends Fixture implements DependentFixtureInterface
                 ->setPrice($pastryDetails['price'])
                 ->setDescription($pastryDetails['description'])
                 ->setIsVisible($pastryDetails['isVisible'])
+                ->setPicture(null)
                 ->setCategory($this->getReference($pastryDetails['category']))
                 ->setSubCollection($this->getReference($pastryDetails['subCollection']))
                 ->setFlavour($this->getReference($pastryDetails['flavour']));
