@@ -1,0 +1,20 @@
+App\DTO\User\UserDTO:
+  properties:
+    id:
+      - Type: integer
+      - NotBlank: ~
+    firstName:
+      - Type: string
+      - NotBlank: ~
+    lastName:
+      - Type: string
+      - NotBlank: ~
+    password:
+      - Type: string
+      - NotBlank: ~
+    email:
+      - Type: string
+      - NotBlank: ~
+    roleId:
+      - Type: integer
+      - NotBlank: ~

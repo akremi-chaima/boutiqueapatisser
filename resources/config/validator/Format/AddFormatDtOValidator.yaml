@@ -1,0 +1,8 @@
+App\DTO\Format\FormatDTO:
+  properties:
+    name:
+      - Type: string
+      - NotBlank: ~
+    pastryId:
+      - Type: integer
+      - NotBlank: ~

@@ -1,0 +1,11 @@
+App\DTO\Role\RoleDTO:
+  properties:
+    id:
+      - Type: integer
+      - NotBlank: ~
+    name:
+      - Type: string
+      - NotBlank: ~
+    code:
+      - Type: string
+      - NotBlank: ~

@@ -1,0 +1,11 @@
+App\DTO\SubCollection\SubCollectionDTO:
+  properties:
+    name:
+      - Type: string
+      - NotBlank: ~
+    isActive:
+      - Type: boolean
+      - NotBlank: ~
+    collectionId:
+      - Type: integer
+      - NotBlank: ~

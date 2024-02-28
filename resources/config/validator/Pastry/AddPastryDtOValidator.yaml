@@ -1,0 +1,23 @@
+App\DTO\Pastry\PastryDTO:
+  properties:
+    name:
+      - Type: string
+      - NotBlank: ~
+    price:
+      - Type: float
+      - NotBlank: ~
+    description:
+      - Type: string
+      - NotBlank: ~
+    isVisible:
+      - Type: boolean
+      - NotBlank: ~
+    categoryId:
+      - Type: integer
+      - NotBlank: ~
+    subCollectionId:
+      - Type: integer
+      - NotBlank: ~
+    flavourId:
+      - Type: integer
+      - NotBlank: ~

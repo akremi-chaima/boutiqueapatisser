@@ -1,0 +1,8 @@
+App\DTO\Flavour\FlavourDTO:
+  properties:
+    name:
+      - Type: string
+      - NotBlank: ~
+    isActive:
+      - Type: boolean
+      - NotBlank: ~

@@ -1,0 +1,8 @@
+App\DTO\Collection\CollectionDTO:
+  properties:
+    name:
+      - Type: string
+      - NotBlank: ~
+    isActive:
+      - Type: boolean
+      - NotBlank: ~

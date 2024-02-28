@@ -1,0 +1,8 @@
+App\DTO\OrderStatus\OrderStatusDTO:
+  properties:
+    id:
+      - Type: integer
+      - NotBlank: ~
+    name:
+      - Type: string
+      - NotBlank: ~
