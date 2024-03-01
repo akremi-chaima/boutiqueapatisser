@@ -56,6 +56,7 @@ class GetPastriesByFilterController extends AbstractController
      *              @OA\Property(property="price", type="float"),
      *              @OA\Property(property="categoryId", type="integer"),
      *              @OA\Property(property="subCollectionId", type="integer"),
+     *              @OA\Property(property="collectionId", type="integer"),
      *              @OA\Property(property="flavourId", type="integer"),
      *              @OA\Property(property="orderBy", type="string"),
      *          )

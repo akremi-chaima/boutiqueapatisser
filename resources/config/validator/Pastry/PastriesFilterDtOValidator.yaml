@@ -12,6 +12,9 @@ App\DTO\Pastry\PastryDTO:
     subCollectionId:
       - Type: integer
       - NotBlank: ~
+    collectionId:
+      - Type: integer
+      - NotBlank: ~
     flavourId:
       - Type: integer
       - NotBlank: ~

@@ -27,6 +27,11 @@ class PastriesFilterDTO
     /**
      * @inheritdoc
      */
+    private $collectionId;
+
+    /**
+     * @inheritdoc
+     */
     private $flavourId;
 
     /**
@@ -140,6 +145,24 @@ class PastriesFilterDTO
     public function setOrderBy($orderBy)
     {
         $this->orderBy = $orderBy;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCollectionId()
+    {
+        return $this->collectionId;
+    }
+
+    /**
+     * @param mixed $collectionId
+     * @return PastriesFilterDTO
+     */
+    public function setCollectionId($collectionId)
+    {
+        $this->collectionId = $collectionId;
         return $this;
     }
 

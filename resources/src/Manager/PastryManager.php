@@ -3,7 +3,9 @@
 namespace App\Manager;
 
 use App\DTO\Pastry\PastriesFilterDTO;
+use App\Entity\Collection;
 use App\Entity\Pastry;
+use App\Entity\SubCollection;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
 use Knp\Component\Pager\PaginatorInterface;
@@ -93,6 +95,18 @@ class PastryManager extends AbstractManager
         if (!empty($dto->getName())) {
             $queryBuilder->andWhere('pastry.name LIKE :name')
                 ->setParameter(':name', '%'.$dto->getName().'%');
+        }
+        if (!empty($dto->getSubCollectionId()) || !empty($dto->getCollectionId())) {
+            $queryBuilder->join(SubCollection::class, 'subCollection', 'WITH', 'subCollection = pastry.subCollection');
+            if (!empty($dto->getCollectionId())) {
+                $queryBuilder->join(Collection::class, 'collection', 'WITH', 'collection = subCollection.collection')
+                    ->andWhere('collection.id = :collectionId')
+                    ->setParameter(':collectionId', $dto->getCollectionId());
+            }
+            if (!empty($dto->getSubCollectionId())) {
+                $queryBuilder->andWhere('subCollection.id = :subCollectionId')
+                    ->setParameter(':subCollectionId', $dto->getSubCollectionId());
+            }
         }
 
         if (!empty($dto->getOrderBy())) {

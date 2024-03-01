@@ -17,6 +17,7 @@ class PastriesFilterDenormalizer implements DenormalizerInterface
             ->setPrice($data['price'] ?? null)
             ->setCategoryId($data['categoryId'] ?? null)
             ->setSubCollectionId($data['subCollectionId'] ?? null)
+            ->setCollectionId($data['collectionId'] ?? null)
             ->setFlavourId($data['flavourId'] ?? null)
             ->setOrderBy($data['orderBy'] ?? null);
     }

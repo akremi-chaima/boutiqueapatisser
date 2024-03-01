@@ -3,7 +3,6 @@
 namespace App\Controller\Collection;
 
 use App\DTO\Collection\AddCollectionDTO;
-use App\DTO\Collection\UpdateCollectionDTO;
 use App\Entity\Collection;
 use App\Manager\CollectionManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
