@@ -3,7 +3,9 @@
 namespace App\Manager;
 
 use App\DTO\Pastry\PastriesFilterDTO;
+use App\Entity\Category;
 use App\Entity\Collection;
+use App\Entity\Flavour;
 use App\Entity\Pastry;
 use App\Entity\SubCollection;
 use Doctrine\ORM\EntityManagerInterface;
@@ -96,6 +98,18 @@ class PastryManager extends AbstractManager
             $queryBuilder->andWhere('pastry.name LIKE :name')
                 ->setParameter(':name', '%'.$dto->getName().'%');
         }
+        if (!empty($dto->getCategoryId())) {
+            $queryBuilder->join(Category::class, 'category', 'WITH', 'category = pastry.category')
+                ->andWhere('category.id = :categoryId')
+                ->setParameter(':categoryId', $dto->getCategoryId());
+        }
+
+        if (!empty($dto->getFlavourId())) {
+            $queryBuilder->join(Flavour::class, 'flavour', 'WITH', 'flavour = pastry.flavour')
+                ->andWhere('flavour.id = :flavourId')
+                ->setParameter(':flavourId', $dto->getFlavourId());
+        }
+
         if (!empty($dto->getSubCollectionId()) || !empty($dto->getCollectionId())) {
             $queryBuilder->join(SubCollection::class, 'subCollection', 'WITH', 'subCollection = pastry.subCollection');
             if (!empty($dto->getCollectionId())) {
