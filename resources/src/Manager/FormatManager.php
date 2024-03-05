@@ -3,6 +3,7 @@
 namespace App\Manager;
 
 use App\Entity\Format;
+use App\Entity\Pastry;
 use Doctrine\ORM\EntityManagerInterface;
 
 /**
@@ -36,5 +37,15 @@ class FormatManager extends AbstractManager
     {
         $this->getEntityManager()->remove($object);
         $this->getEntityManager()->flush();
+    }
+
+    public function deleteFormat(Pastry $pastry)
+    {
+        $qb = $this->entityManager->createQueryBuilder();
+        $qb->delete(Format::class, 'f')
+            ->where('f.pastry = :pastry')
+            ->setParameter(':pastry', $pastry);
+        $qb->getQuery()->execute();
+
     }
 }
