@@ -15,9 +15,6 @@ App\DTO\User\UserDTO:
     email:
       - Type: string
       - NotBlank: ~
-    roleId:
-      - Type: integer
-      - NotBlank: ~
     phoneNumber:
       - Type: string
       - NotBlank: ~

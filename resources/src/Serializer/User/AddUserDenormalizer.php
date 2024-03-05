@@ -17,8 +17,7 @@ class AddUserDenormalizer implements DenormalizerInterface
             ->setFirstName($data['firstName'] ?? null)
             ->setLastName($data['lastName'] ?? null)
             ->setPassword($data['password'] ?? null)
-            ->setEmail($data['email'] ?? null)
-            ->setRoleId($data['roleId']);
+            ->setEmail($data['email'] ?? null);
     }
 
     /**

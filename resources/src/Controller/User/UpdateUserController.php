@@ -95,7 +95,7 @@ class UpdateUserController extends AbstractController
             return new JsonResponse(['error_messages' => $display], Response::HTTP_BAD_REQUEST);
         }
 
-        $role = $this->roleManager->findOneBy(['id' => $dto->getRoleId()]);
+        $role = $this->roleManager->findOneBy(['code' => 'client']);
         if (is_null($role)) {
             return new JsonResponse(['error_message' => 'The role is not found'], Response::HTTP_BAD_REQUEST);
         }

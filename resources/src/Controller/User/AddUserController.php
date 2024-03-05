@@ -99,7 +99,7 @@ class AddUserController extends AbstractController
         }
 
         // validate role
-        $role = $this->roleManager->findOneBy(['id' => $dto->getRoleId()]);
+        $role = $this->roleManager->findOneBy(['code' => 'client']);
         if (is_null($role)) {
             return new JsonResponse(['error_message' => 'The role is not found'], Response::HTTP_BAD_REQUEST);
         }

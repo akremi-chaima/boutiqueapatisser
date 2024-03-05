@@ -31,11 +31,6 @@ class AddUserDTO
     private $email;
 
     /**
-     * @inheritdoc
-     */
-    private $roleId;
-
-    /**
      * @return mixed
      */
     public function getFirstName()
@@ -104,24 +99,6 @@ class AddUserDTO
     public function setEmail($email)
     {
         $this->email = $email;
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getRoleId()
-    {
-        return $this->roleId;
-    }
-
-    /**
-     * @param mixed $roleId
-     * @return AddUserDTO
-     */
-    public function setRoleId($roleId)
-    {
-        $this->roleId = $roleId;
         return $this;
     }
 
