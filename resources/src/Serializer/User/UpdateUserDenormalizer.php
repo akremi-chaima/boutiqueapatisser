@@ -19,6 +19,7 @@ class UpdateUserDenormalizer implements DenormalizerInterface
             ->setLastName($data['lastName'] ?? null)
             ->setPassword($data['password'] ?? null)
             ->setEmail($data['email'] ?? null)
+            ->setPhoneNumber($data['phoneNumber'] ?? null)
             ->setRoleId($data['roleId']);
     }
 

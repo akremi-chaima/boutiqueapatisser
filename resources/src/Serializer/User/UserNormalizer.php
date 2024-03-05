@@ -24,10 +24,11 @@ class UserNormalizer implements NormalizerInterface
     {
         return [
             'id' => $user->getId(),
-            'first_name' => $user->getFirstName(),
-            'last_name' => $user->getLastName(),
+            'firstName' => $user->getFirstName(),
+            'lastName' => $user->getLastName(),
             'password' => $user->getPassword(),
             'email' => $user->getEmail(),
+            'phoneNumber' => $user->getPhoneNumber(),
             'role' => $this->roleNormalizer->normalize($user->getRole())
         ];
     }

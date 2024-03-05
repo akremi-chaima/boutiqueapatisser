@@ -17,6 +17,12 @@ class AddUserDTO
     /**
      * @inheritdoc
      */
+    private $phoneNumber;
+
+
+    /**
+     * @inheritdoc
+     */
     private $password;
 
     /**
@@ -116,6 +122,24 @@ class AddUserDTO
     public function setRoleId($roleId)
     {
         $this->roleId = $roleId;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPhoneNumber()
+    {
+        return $this->phoneNumber;
+    }
+
+    /**
+     * @param mixed $phoneNumber
+     * @return AddUserDTO
+     */
+    public function setPhoneNumber($phoneNumber)
+    {
+        $this->phoneNumber = $phoneNumber;
         return $this;
     }
 

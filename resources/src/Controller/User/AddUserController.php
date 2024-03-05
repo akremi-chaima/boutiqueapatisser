@@ -60,9 +60,10 @@ class AddUserController extends AbstractController
      *     @OA\MediaType(
      *          mediaType="application/json",
      *          @OA\Schema(
-     *              required={"id", "firstName", "lastName", "password", "email"},
+     *              required={"id", "firstName", "lastName", "phoneNummber", "password", "email"},
      *              @OA\Property(property="firstName", type="string"),
      *              @OA\Property(property="lastName", type="string"),
+     *              @OA\Property(property="phoneNummber", type="string"),
      *              @OA\Property(property="password", type="string"),
      *              @OA\Property(property="email", type="string"),
      *              @OA\Property(property="roleId", type="intger"),
@@ -108,6 +109,7 @@ class AddUserController extends AbstractController
             ->setLastName($dto->getLastName())
             ->setPassword($dto->getPassword())
             ->setEmail($dto->getEmail())
+            ->setPhoneNumber($dto->getPhoneNumber())
             ->setRole($role);
 
         $this->userManager->save($user);
