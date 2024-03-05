@@ -112,16 +112,16 @@ class AddPastryController extends AbstractController
             return new JsonResponse(['error_messages' => $display], Response::HTTP_BAD_REQUEST);
         }
 
-        // validate flavour
-        $flavour = $this->flavourManager->findOneBy(['id' => $dto->getFlavourId()]);
-        if (is_null($flavour)) {
-            return new JsonResponse(['error_message' => 'The flavour is not found'], Response::HTTP_BAD_REQUEST);
-        }
-
         // validate category
         $category = $this->categoryManager->findOneBy(['id' => $dto->getCategoryId()]);
         if (is_null($category)) {
             return new JsonResponse(['error_message' => 'The category is not found'], Response::HTTP_BAD_REQUEST);
+        }
+
+        // validate flavour
+        $flavour = $this->flavourManager->findOneBy(['id' => $dto->getFlavourId()]);
+        if (is_null($flavour)) {
+            return new JsonResponse(['error_message' => 'The flavour is not found'], Response::HTTP_BAD_REQUEST);
         }
 
         // validate subCollection
