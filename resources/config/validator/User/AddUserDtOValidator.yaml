@@ -16,3 +16,12 @@ App\DTO\User\UserDTO:
       - Type: string
       - NotBlank: ~
       - Regex: '/^0[1|2|3|4|5|6|7|9][0-9]{8}$/'
+    city:
+      - Type: string
+      - NotBlank: ~
+    zipCode:
+      - Type: string
+      - NotBlank: ~
+    street:
+      - Type: string
+      - NotBlank: ~

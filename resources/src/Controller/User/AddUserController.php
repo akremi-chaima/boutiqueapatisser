@@ -3,7 +3,9 @@
 namespace App\Controller\User;
 
 use App\DTO\User\AddUserDTO;
+use App\Entity\Address;
 use App\Entity\User;
+use App\Manager\AddressManager;
 use App\Manager\RoleManager;
 use App\Manager\UserManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -29,23 +31,30 @@ class AddUserController extends AbstractController
     /** @var ValidatorInterface */
     protected $validator;
 
+    /* @var AddressManager */
+    private $addressManager;
+
     /**
      * @param UserManager $userManager
      * @param RoleManager $roleManager
      * @param SerializerInterface $serializer
      * @param ValidatorInterface $validator
+     * @param AddressManager $addressManager
      */
+
     public function __construct(
         UserManager $userManager,
         RoleManager $roleManager,
         SerializerInterface $serializer,
-        ValidatorInterface $validator
+        ValidatorInterface $validator,
+        AddressManager $addressManager
     )
     {
         $this->userManager = $userManager;
         $this->roleManager = $roleManager;
         $this->serializer = $serializer;
         $this->validator = $validator;
+        $this->addressManager = $addressManager;
     }
 
     /**
@@ -60,12 +69,15 @@ class AddUserController extends AbstractController
      *     @OA\MediaType(
      *          mediaType="application/json",
      *          @OA\Schema(
-     *              required={"id", "firstName", "lastName", "phoneNummber", "password", "email"},
+     *              required={"firstName", "lastName", "phoneNummber", "password", "email", "city", "zipCode", "street"},
      *              @OA\Property(property="firstName", type="string"),
      *              @OA\Property(property="lastName", type="string"),
      *              @OA\Property(property="phoneNummber", type="string"),
      *              @OA\Property(property="password", type="string"),
      *              @OA\Property(property="email", type="string"),
+     *              @OA\Property(property="city", type="string"),
+     *              @OA\Property(property="zipCode", type="string"),
+     *              @OA\Property(property="street", type="string"),
      *          )
      *      )
      * )
@@ -111,6 +123,14 @@ class AddUserController extends AbstractController
             ->setRole($role);
 
         $this->userManager->save($user);
+
+        $address = (new Address())
+            ->setStreet($dto->getStreet())
+            ->setCity($dto->getCity())
+            ->setZipCode($dto->getZipCode())
+            ->setUser($user);
+        $this->addressManager->save($address);
+
         return new JsonResponse(['message' => 'OK'], Response::HTTP_OK);
 
     }
