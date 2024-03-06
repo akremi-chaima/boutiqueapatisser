@@ -22,5 +22,5 @@ App\DTO\Pastry\PastryDTO:
       - Type: integer
       - NotBlank: ~
     formats:
-      - Type: array
+      - Type: string
 

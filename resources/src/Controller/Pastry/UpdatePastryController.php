@@ -88,6 +88,7 @@ class UpdatePastryController extends AbstractController
      *              @OA\Property(property="name", type="string"),
      *              @OA\Property(property="price", type="float"),
      *              @OA\Property(property="descripion", type="string"),
+     *              @OA\Property(property="formats", type="string"),
      *              @OA\Property(property="isVisible", type="boolean"),
      *              @OA\Property(property="categoryId", type="integer"),
      *              @OA\Property(property="subCollectionId", type="integer"),
@@ -161,11 +162,11 @@ class UpdatePastryController extends AbstractController
         $this->pastryManager->save($pastry);
 
         if (!empty($dto->getFormats())) {
-            foreach ($dto->getFormats() as $format) {
+            $formats = explode(',', $dto->getFormats());
+            foreach ($formats as $format) {
                 $newFormat = (new Format())
                     ->setName($format)
                     ->setPastry($pastry);
-
                 $this->formatManager->save($newFormat);
             }
         }
