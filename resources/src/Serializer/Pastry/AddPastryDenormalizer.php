@@ -19,7 +19,8 @@ class AddPastryDenormalizer implements DenormalizerInterface
             ->setIsVisible($data['isVisible'] ?? null)
             ->setCategoryId($data['categoryId'] ?? null)
             ->setSubCollectionId($data['subCollectionId'] ?? null)
-            ->setFlavourId($data['flavourId'] ?? null);
+            ->setFlavourId($data['flavourId'] ?? null)
+            ->setFormats($data['formats'] ?? null);
     }
 
     /**

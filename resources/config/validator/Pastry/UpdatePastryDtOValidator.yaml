@@ -24,3 +24,5 @@ App\DTO\Pastry\PastryDTO:
     flavourId:
       - Type: integer
       - NotBlank: ~
+    formats:
+      - Type: array

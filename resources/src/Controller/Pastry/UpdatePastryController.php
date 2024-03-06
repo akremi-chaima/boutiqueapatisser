@@ -3,9 +3,11 @@
 namespace App\Controller\Pastry;
 
 use App\DTO\Pastry\UpdatePastryDTO;
+use App\Entity\Format;
 use App\Entity\Pastry;
 use App\Manager\CategoryManager;
 use App\Manager\FlavourManager;
+use App\Manager\FormatManager;
 use App\Manager\PastryManager;
 use App\Manager\SubCollectionManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -36,7 +38,10 @@ class UpdatePastryController extends AbstractController
     private $serializer;
 
     /** @var ValidatorInterface */
-    protected $validator;
+    protected  $validator;
+
+   /* @var FormatManager */
+    private $formatManager;
 
     /**
      * @param FlavourManager $flavourManager
@@ -45,6 +50,7 @@ class UpdatePastryController extends AbstractController
      * @param PastryManager $pastryManager
      * @param SerializerInterface $serializer
      * @param ValidatorInterface $validator
+     * @param FormatManager $formatManager
      */
     public function __construct(
         FlavourManager $flavourManager,
@@ -52,7 +58,8 @@ class UpdatePastryController extends AbstractController
         SubCollectionManager $subCollectionManager,
         PastryManager $pastryManager,
         SerializerInterface $serializer,
-        ValidatorInterface $validator
+        ValidatorInterface $validator,
+        FormatManager $formatManager
     )
     {
         $this->flavourManager = $flavourManager;
@@ -61,6 +68,7 @@ class UpdatePastryController extends AbstractController
         $this->pastryManager = $pastryManager;
         $this->serializer = $serializer;
         $this->validator = $validator;
+        $this->formatManager = $formatManager;
     }
 
     /**
@@ -139,6 +147,8 @@ class UpdatePastryController extends AbstractController
             unlink($destination.'/'.$file->getClientOriginalName());
         }
 
+        $this->formatManager->deleteFormat($pastry);
+
         $pastry->setName($dto->getName())
             ->setPrice($dto->getPrice())
             ->setDescription($dto->getDescription())
@@ -149,6 +159,16 @@ class UpdatePastryController extends AbstractController
             ->setPicture(!is_null($file) ? $file->getClientOriginalName() : null);
 
         $this->pastryManager->save($pastry);
+
+        if (!empty($dto->getFormats())) {
+            foreach ($dto->getFormats() as $format) {
+                $newFormat = (new Format())
+                    ->setName($format)
+                    ->setPastry($pastry);
+
+                $this->formatManager->save($newFormat);
+            }
+        }
 
         if (!empty($file)) {
             $file->move($destination, $file->getClientOriginalName());

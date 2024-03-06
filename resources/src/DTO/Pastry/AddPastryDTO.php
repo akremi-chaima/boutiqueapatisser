@@ -39,6 +39,8 @@ class AddPastryDTO
      */
     private $flavourId;
 
+    private $formats;
+
     /**
      * @return mixed
      */
@@ -153,6 +155,24 @@ class AddPastryDTO
     public function getFlavourId()
     {
         return $this->flavourId;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFormats()
+    {
+        return $this->formats;
+    }
+
+    /**
+     * @param mixed $formats
+     * @return AddPastryDTO
+     */
+    public function setFormats($formats)
+    {
+        $this->formats = $formats;
+        return $this;
     }
 
     /**

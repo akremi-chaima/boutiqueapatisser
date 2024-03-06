@@ -69,8 +69,6 @@ class UpdateUserController extends AbstractController
      *              @OA\Property(property="phoneNummber", type="string"),
      *              @OA\Property(property="password", type="string"),
      *              @OA\Property(property="email", type="string"),
-     *              @OA\Property(property="roleId", type="intger"),
-     *
      *          )
      *      )
      * )

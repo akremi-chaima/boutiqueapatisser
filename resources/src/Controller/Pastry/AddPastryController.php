@@ -3,9 +3,11 @@
 namespace App\Controller\Pastry;
 
 use App\DTO\Pastry\AddPastryDTO;
+use App\Entity\Format;
 use App\Entity\Pastry;
 use App\Manager\CategoryManager;
 use App\Manager\FlavourManager;
+use App\Manager\FormatManager;
 use App\Manager\PastryManager;
 use App\Manager\SubCollectionManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -38,6 +40,9 @@ class AddPastryController extends AbstractController
     /** @var ValidatorInterface */
     protected $validator;
 
+    /** @var FormatManager */
+    private $formatManager;
+
     /**
      * @param FlavourManager $flavourManager
      * @param CategoryManager $categoryManager
@@ -45,6 +50,7 @@ class AddPastryController extends AbstractController
      * @param PastryManager $pastryManager
      * @param SerializerInterface $serializer
      * @param ValidatorInterface $validator
+     * @param FormatManager $formatManager
      */
     public function __construct(
         FlavourManager $flavourManager,
@@ -52,7 +58,8 @@ class AddPastryController extends AbstractController
         SubCollectionManager $subCollectionManager,
         PastryManager $pastryManager,
         SerializerInterface $serializer,
-        ValidatorInterface $validator
+        ValidatorInterface $validator,
+        FormatManager $formatManager
     )
     {
         $this->flavourManager = $flavourManager;
@@ -61,6 +68,7 @@ class AddPastryController extends AbstractController
         $this->pastryManager = $pastryManager;
         $this->serializer = $serializer;
         $this->validator = $validator;
+        $this->formatManager = $formatManager;
     }
 
     /**
@@ -142,6 +150,14 @@ class AddPastryController extends AbstractController
 
         $this->pastryManager->save($pastry);
 
+        if (!empty($dto->getFormats())) {
+            foreach ($dto->getFormats() as $format) {
+                $newFormat = (new Format())
+                    ->setName($format)
+                    ->setPastry($pastry);
+                $this->formatManager->save($newFormat);
+            }
+        }
         if (!is_null($file)) {
             $destination = $this->getParameter('kernel.project_dir').'/public/uploads/'.$pastry->getId();
             $file->move($destination, $file->getClientOriginalName());
