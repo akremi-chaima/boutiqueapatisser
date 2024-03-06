@@ -11,6 +11,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Role
 {
+    const ROLE_ADMINISTRATOR = 'admin';
+    const ROLE_CUSTOMER = 'client';
+
     /**
      * @var int
      *

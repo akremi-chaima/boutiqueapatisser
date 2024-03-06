@@ -29,7 +29,7 @@ class UserNormalizer implements NormalizerInterface
             'password' => $user->getPassword(),
             'email' => $user->getEmail(),
             'phoneNumber' => $user->getPhoneNumber(),
-            'role' => $this->roleNormalizer->normalize($user->getRole())
+            'role' => $this->roleNormalizer->normalize($user->getRoles()[0])
         ];
     }
 

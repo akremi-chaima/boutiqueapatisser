@@ -2,6 +2,8 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * User
@@ -9,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="user")
  * @ORM\Entity
  */
-class User
+class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     /**
      * @var int
@@ -37,7 +39,7 @@ class User
     /**
      * @var string
      *
-     * @ORM\Column(name="password", type="string", length=45, nullable=false)
+     * @ORM\Column(name="password", type="string", length=200, nullable=false)
      */
     private $password;
 
@@ -71,6 +73,16 @@ class User
     public function getId(): int
     {
         return $this->id;
+    }
+
+    /**
+     * @param int $id
+     * @return User
+     */
+    public function setId(int $id): User
+    {
+        $this->id = $id;
+        return $this;
     }
 
     /**
@@ -146,11 +158,11 @@ class User
     }
 
     /**
-     * @return Role
+     * @return array
      */
-    public function getRole(): Role
+    public function getRoles(): array
     {
-        return $this->role;
+        return [$this->role->getCode()];
     }
 
     /**
@@ -179,5 +191,24 @@ class User
     {
         $this->phoneNumber = $phoneNumber;
         return $this;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getSalt()
+    {
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function eraseCredentials()
+    {
+    }
+
+    public function getUserIdentifier(): string
+    {
+        return $this->email;
     }
 }

@@ -4,6 +4,7 @@ namespace App\Controller\User;
 
 use App\DTO\User\AddUserDTO;
 use App\Entity\Address;
+use App\Entity\Role;
 use App\Entity\User;
 use App\Manager\AddressManager;
 use App\Manager\RoleManager;
@@ -12,6 +13,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use OpenApi\Annotations as OA;
 use Symfony\Component\Serializer\SerializerInterface;
@@ -34,12 +36,16 @@ class AddUserController extends AbstractController
     /* @var AddressManager */
     private $addressManager;
 
+    /** @var UserPasswordHasherInterface */
+    private $userPasswordHasherInterface;
+
     /**
      * @param UserManager $userManager
      * @param RoleManager $roleManager
      * @param SerializerInterface $serializer
      * @param ValidatorInterface $validator
      * @param AddressManager $addressManager
+     * @param UserPasswordHasherInterface $userPasswordHasherInterface
      */
 
     public function __construct(
@@ -47,7 +53,8 @@ class AddUserController extends AbstractController
         RoleManager $roleManager,
         SerializerInterface $serializer,
         ValidatorInterface $validator,
-        AddressManager $addressManager
+        AddressManager $addressManager,
+        UserPasswordHasherInterface $userPasswordHasherInterface
     )
     {
         $this->userManager = $userManager;
@@ -55,6 +62,7 @@ class AddUserController extends AbstractController
         $this->serializer = $serializer;
         $this->validator = $validator;
         $this->addressManager = $addressManager;
+        $this->userPasswordHasherInterface = $userPasswordHasherInterface;
     }
 
     /**
@@ -109,7 +117,7 @@ class AddUserController extends AbstractController
         }
 
         // validate role
-        $role = $this->roleManager->findOneBy(['code' => 'client']);
+        $role = $this->roleManager->findOneBy(['code' => Role::ROLE_CUSTOMER]);
         if (is_null($role)) {
             return new JsonResponse(['error_message' => 'The role is not found'], Response::HTTP_BAD_REQUEST);
         }
@@ -121,6 +129,8 @@ class AddUserController extends AbstractController
             ->setEmail($dto->getEmail())
             ->setPhoneNumber($dto->getPhoneNumber())
             ->setRole($role);
+        // hash user password
+        $user->setPassword($this->userPasswordHasherInterface->hashPassword($user, hash('sha256', $dto->getPassword())));
 
         $this->userManager->save($user);
 
