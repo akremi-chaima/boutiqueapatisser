@@ -20,7 +20,7 @@ class GetUserController extends AbstractController
 
 
     /**
-     * @param UserManager $pastryManager
+     * @param UserManager $userManager
      * @param SerializerInterface $serializer
      */
     public function __construct(UserManager $userManager, SerializerInterface $serializer)
@@ -38,7 +38,7 @@ class GetUserController extends AbstractController
      *
      * @OA\Response(response=200, description="User")
      *
-     * @param int $id
+     * @param UserInterface $user
      * @return JsonResponse
      */
     public function __invoke(UserInterface $user): JsonResponse

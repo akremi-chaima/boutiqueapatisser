@@ -26,11 +26,6 @@ class UpdateAddressDTO
     private $street;
 
     /**
-     * @inheritdoc
-     */
-    private $userId;
-
-    /**
      * @return mixed
      */
     public function getId()
@@ -101,25 +96,5 @@ class UpdateAddressDTO
         $this->street = $street;
         return $this;
     }
-
-    /**
-     * @return mixed
-     */
-    public function getUserId()
-    {
-        return $this->userId;
-    }
-
-    /**
-     * @param mixed $userId
-     * @return UpdateAddressDTO
-     */
-    public function setUserId($userId)
-    {
-        $this->userId = $userId;
-        return $this;
-    }
-
-
 
 }

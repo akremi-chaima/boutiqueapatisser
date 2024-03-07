@@ -16,8 +16,7 @@ class UpdateAddressDenormalizer implements DenormalizerInterface
             ->setId($data['id'] ?? null)
             ->setCity($data['city'] ?? null)
             ->setZipCode($data['zipCode'] ?? null)
-            ->setStreet($data['street'] ?? null)
-            ->setUserId($data['userId'] ?? null);
+            ->setStreet($data['street'] ?? null);
     }
 
     /**

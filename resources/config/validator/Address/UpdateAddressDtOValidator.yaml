@@ -1,0 +1,14 @@
+App\DTO\Format\FormatDTO:
+  properties:
+    id:
+      - Type: integer
+      - NotBlank: ~
+    city:
+      - Type: string
+      - NotBlank: ~
+    zipCode:
+      - Type: string
+      - NotBlank: ~
+    street:
+      - Type: string
+      - NotBlank: ~

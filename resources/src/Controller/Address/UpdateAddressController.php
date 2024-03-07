@@ -3,10 +3,7 @@
 namespace App\Controller\Address;
 
 use App\DTO\Address\UpdateAddressDTO;
-use App\DTO\SubCollection\UpdateSubCollectionDTO;
 use App\Manager\AddressManager;
-use App\Manager\CollectionManager;
-use App\Manager\SubCollectionManager;
 use App\Manager\UserManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -20,8 +17,6 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 class UpdateAddressController extends AbstractController
 {
 
-    /* @var UserManager */
-    private $userManager;
 
     /* @var AddressManager */
     private $addressManager;
@@ -63,12 +58,11 @@ class UpdateAddressController extends AbstractController
      *     @OA\MediaType(
      *          mediaType="application/json",
      *          @OA\Schema(
-     *              required={"id", "city", "zipCode", "street", "userId"},
+     *              required={"id", "city", "zipCode", "street"},
      *              @OA\Property(property="id", type="integer"),
      *              @OA\Property(property="city", type="string"),
      *              @OA\Property(property="zipCode", type="string"),
      *              @OA\Property(property="street", type="string"),
-     *              @OA\Property(property="userId", type="intger"),
      *
      *          )
      *      )
@@ -94,10 +88,6 @@ class UpdateAddressController extends AbstractController
             return new JsonResponse(['error_messages' => $display], Response::HTTP_BAD_REQUEST);
         }
 
-        $user = $this->userManager->findOneBy(['id' => $dto->getUserId()]);
-        if (is_null($user)) {
-            return new JsonResponse(['error_message' => 'The user is not found'], Response::HTTP_BAD_REQUEST);
-        }
         $address = $this->addressManager->findOneBy(['id' => $dto->getId()]);
         if (is_null($address)) {
             return new JsonResponse(['error_message' => 'The address is not found'], Response::HTTP_BAD_REQUEST);
@@ -105,8 +95,7 @@ class UpdateAddressController extends AbstractController
 
         $address->setCity($dto->getCity())
             ->setZipCode($dto->getZipCode())
-            ->setStreet($dto->getStreet())
-            ->setUser($user);
+            ->setStreet($dto->getStreet());
 
         $this->addressManager->save($address);
         return new JsonResponse(['message' => 'OK'], Response::HTTP_OK);
