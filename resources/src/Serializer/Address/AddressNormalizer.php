@@ -3,20 +3,10 @@
 namespace App\Serializer\Address;
 
 use App\Entity\Address;
-use App\Serializer\User\UserNormalizer;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 class AddressNormalizer implements NormalizerInterface
 {
-    /** @var UserNormalizer $userNormalizer */
-    private $userNormalizer;
-
-    /**
-     * @param UserNormalizer $userNormalizer
-     */
-    public function __construct(UserNormalizer $userNormalizer) {
-        $this->userNormalizer = $userNormalizer;
-    }
     /**
      * @param Address $address
      * @param string|null $format
@@ -29,8 +19,7 @@ class AddressNormalizer implements NormalizerInterface
             'id' => $address->getId(),
             'city' => $address->getCity(),
             'zipCode' => $address->getZipCode(),
-            'street' => $address->getStreet(),
-            'userId' => $this->userNormalizer->normalize($address->getUser())
+            'street' => $address->getStreet()
         ];
     }
 
