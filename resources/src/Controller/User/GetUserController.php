@@ -3,6 +3,7 @@
 namespace App\Controller\User;
 
 use App\Manager\UserManager;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -31,7 +32,7 @@ class GetUserController extends AbstractController
     /**
      * Get user by id
      *
-     * @Route("/api/user/{id}", methods={"GET"})
+     * @Route("/api/private/user", methods={"GET"})
      *
      * @OA\Tag(name="Users")
      *
@@ -40,9 +41,9 @@ class GetUserController extends AbstractController
      * @param int $id
      * @return JsonResponse
      */
-    public function __invoke(int $id): JsonResponse
+    public function __invoke(UserInterface $user): JsonResponse
     {
-        $user = $this->userManager->findOneBy(['id' => $id]);
+        $user = $this->userManager->findOneBy(['id' => $user->getId()]);
         if (is_null($user)) {
             return new JsonResponse(['error_message' => 'The user is not found'], Response::HTTP_BAD_REQUEST);
         }

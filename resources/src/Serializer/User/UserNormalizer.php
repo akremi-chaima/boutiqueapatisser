@@ -3,17 +3,10 @@
 namespace App\Serializer\User;
 
 use App\Entity\User;
-use App\Serializer\Role\RoleNormalizer;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 class UserNormalizer implements NormalizerInterface
 {
-    /** @var RoleNormalizer */
-    private $roleNormalizer;
-
-    public function __construct(RoleNormalizer $roleNormalizer) {
-        $this->roleNormalizer = $roleNormalizer;
-    }
     /**
      * @param User $user
      * @param string|null $format
@@ -29,7 +22,7 @@ class UserNormalizer implements NormalizerInterface
             'password' => $user->getPassword(),
             'email' => $user->getEmail(),
             'phoneNumber' => $user->getPhoneNumber(),
-            'role' => $this->roleNormalizer->normalize($user->getRoles()[0])
+            'role' => $user->getRoles()[0]
         ];
     }
 

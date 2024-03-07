@@ -2,7 +2,9 @@
 
 namespace App\Security;
 
+use App\Entity\Role;
 use App\Entity\User;
+use App\Manager\RoleManager;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
@@ -14,13 +16,17 @@ class JwtUserProvider implements UserProviderInterface
     /** @var JwtUtil $jwtUtil */
     private $jwtUtil;
 
+    /* @var RoleManager */
+    private $roleManager;
+
     /**
      * JwtUserProvider constructor.
      * @param JwtUtil $jwtUtil
      */
-    public function __construct(JwtUtil $jwtUtil)
+    public function __construct(JwtUtil $jwtUtil, RoleManager $roleManager)
     {
         $this->jwtUtil = $jwtUtil;
+        $this->roleManager = $roleManager;
     }
 
     /**
@@ -67,9 +73,12 @@ class JwtUserProvider implements UserProviderInterface
             throw new CustomUserMessageAuthenticationException('Token expired.', [], Response::HTTP_UNAUTHORIZED);
         }
 
+        /** @var Role|null $role */
+        $role = $this->roleManager->findOneBy(['code' => $payload['user']['role']]);
+
         return (new User())
             ->setId($payload['user']['id'])
             ->setEmail($payload['user']['username'])
-            ->setRole($payload['user']['role']);
+            ->setRole($role);
     }
 }

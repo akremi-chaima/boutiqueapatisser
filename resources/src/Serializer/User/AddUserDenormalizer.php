@@ -19,6 +19,7 @@ class AddUserDenormalizer implements DenormalizerInterface
             ->setPassword($data['password'] ?? null)
             ->setEmail($data['email'] ?? null)
             ->setCity($data['city'] ?? null)
+            ->setPhoneNumber($data['phoneNumber'] ?? null)
             ->setZipCode($data['zipCode'] ?? null)
             ->setStreet($data['street'] ?? null);
     }

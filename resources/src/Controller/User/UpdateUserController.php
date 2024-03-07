@@ -62,7 +62,7 @@ class UpdateUserController extends AbstractController
      *     @OA\MediaType(
      *          mediaType="application/json",
      *          @OA\Schema(
-     *              required={"id", "firstName", "lastName", "phoneNummber", "password", "email"},
+     *              required={"id", "firstName", "lastName", "phoneNummber", "email"},
      *              @OA\Property(property="id", type="integer"),
      *              @OA\Property(property="firstName", type="string"),
      *              @OA\Property(property="lastName", type="string"),
@@ -104,7 +104,6 @@ class UpdateUserController extends AbstractController
 
         $user->setFirstName($dto->getFirstName())
             ->setLastName($dto->getLastName())
-            ->setPassword($dto->getPassword())
             ->setEmail($dto->getEmail())
             ->setPhoneNumber($dto->getPhoneNumber())
             ->setRole($role);
