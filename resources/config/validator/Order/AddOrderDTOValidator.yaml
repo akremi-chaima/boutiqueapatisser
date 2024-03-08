@@ -1,4 +1,4 @@
-App\DTO\Order\OrderDTO:
+App\DTO\Order\AddOrderDTO:
   properties:
     pastries:
       - Type: array

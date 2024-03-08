@@ -2,7 +2,7 @@
 
 namespace App\DTO\Order;
 
-class OrderDTO
+class AddOrderDTO
 {
     /**
      * @inheritdoc
@@ -19,7 +19,7 @@ class OrderDTO
 
     /**
      * @param mixed $pastries
-     * @return OrderDTO
+     * @return AddOrderDTO
      */
     public function setPastries($pastries)
     {

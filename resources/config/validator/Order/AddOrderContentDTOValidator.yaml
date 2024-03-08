@@ -1,4 +1,4 @@
-App\DTO\Order\OrderContentDTO:
+App\DTO\Order\AddOrderContentDTO:
   properties:
     quantity:
       - Type: integer

@@ -2,8 +2,8 @@
 
 namespace App\Controller\Order;
 
-use App\DTO\Order\OrderContentDTO;
-use App\DTO\Order\OrderDTO;
+use App\DTO\Order\AddOrderContentDTO;
+use App\DTO\Order\AddOrderDTO;
 use App\Entity\Order;
 use App\Entity\OrderPastries;
 use App\Entity\OrderStatus;
@@ -107,8 +107,8 @@ class AddOrderController extends AbstractController
      */
     public function __invoke(Request $request, UserInterface $user): JsonResponse
     {
-        /** @var OrderDTO $dto */
-        $dto = $this->serializer->deserialize($request->getContent(), OrderDTO::class, 'json');
+        /** @var AddOrderDTO $dto */
+        $dto = $this->serializer->deserialize($request->getContent(), AddOrderDTO::class, 'json');
 
         $errors = $this->validator->validate($dto);
 
@@ -127,8 +127,8 @@ class AddOrderController extends AbstractController
         /** @var OrderPastries[] $orderPastries */
         $orderPastries = [];
         foreach ($dto->getPastries() as $item) {
-            /** @var OrderContentDTO  $basketContentDTO */
-            $basketContentDTO = $this->serializer->deserialize(json_encode($item), OrderContentDTO::class, 'json');
+            /** @var AddOrderContentDTO  $basketContentDTO */
+            $basketContentDTO = $this->serializer->deserialize(json_encode($item), AddOrderContentDTO::class, 'json');
 
             $errors = $this->validator->validate($basketContentDTO);
 

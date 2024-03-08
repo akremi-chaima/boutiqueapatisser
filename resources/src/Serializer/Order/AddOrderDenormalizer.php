@@ -2,17 +2,17 @@
 
 namespace App\Serializer\Order;
 
-use App\DTO\Order\OrderDTO;
+use App\DTO\Order\AddOrderDTO;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
-class OrderDenormalizer implements DenormalizerInterface
+class AddOrderDenormalizer implements DenormalizerInterface
 {
     /**
      * {@inheritdoc}
      */
     public function denormalize($data, $class, $format = null, array $context = [])
     {
-        return (new OrderDTO())
+        return (new AddOrderDTO())
             ->setPastries($data['pastries'] ?? null);
     }
 
@@ -21,6 +21,6 @@ class OrderDenormalizer implements DenormalizerInterface
      */
     public function supportsDenormalization($data, $type, $format = null)
     {
-        return $type === OrderDTO::class;
+        return $type === AddOrderDTO::class;
     }
 }

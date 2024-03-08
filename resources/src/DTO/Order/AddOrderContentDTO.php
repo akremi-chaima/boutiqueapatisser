@@ -1,7 +1,7 @@
 <?php
 
 namespace App\DTO\Order;
-class OrderContentDTO
+class AddOrderContentDTO
 {
     /**
      * @inheritdoc
@@ -28,7 +28,7 @@ class OrderContentDTO
 
     /**
      * @param mixed $quantity
-     * @return OrderContentDTO
+     * @return AddOrderContentDTO
      */
     public function setQuantity($quantity)
     {
@@ -46,7 +46,7 @@ class OrderContentDTO
 
     /**
      * @param mixed $pastryId
-     * @return OrderContentDTO
+     * @return AddOrderContentDTO
      */
     public function setPastryId($pastryId)
     {
@@ -64,7 +64,7 @@ class OrderContentDTO
 
     /**
      * @param mixed $formatId
-     * @return OrderContentDTO
+     * @return AddOrderContentDTO
      */
     public function setFormatId($formatId)
     {

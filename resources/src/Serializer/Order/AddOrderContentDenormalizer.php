@@ -2,17 +2,17 @@
 
 namespace App\Serializer\Order;
 
-use App\DTO\Order\OrderContentDTO;
+use App\DTO\Order\AddOrderContentDTO;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
-class OrderContentDenormalizer implements DenormalizerInterface
+class AddOrderContentDenormalizer implements DenormalizerInterface
 {
     /**
      * {@inheritdoc}
      */
     public function denormalize($data, $class, $format = null, array $context = [])
     {
-        return (new OrderContentDTO())
+        return (new AddOrderContentDTO())
             ->setQuantity($data['quantity'] ?? null)
             ->setPastryId($data['pastryId'] ?? null)
             ->setFormatId($data['formatId'] ?? null);
@@ -23,6 +23,6 @@ class OrderContentDenormalizer implements DenormalizerInterface
      */
     public function supportsDenormalization($data, $type, $format = null)
     {
-        return $type === OrderContentDTO::class;
+        return $type === AddOrderContentDTO::class;
     }
 }
