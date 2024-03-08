@@ -11,10 +11,11 @@ class OrderStatusFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         $ordersStatus = [
-        'en attente de validation',
-        'en cours de préparation',
-        'préparé'
-    ];
+            OrderStatus::WAITING_FOR_VALIDATION,
+            OrderStatus::IN_PREPARATION,
+            OrderStatus::AWAITING_DELIVERY,
+            OrderStatus::PAID,
+        ];
 
         foreach ($ordersStatus as $orderStatusName) {
             $orderStatus = (new OrderStatus())

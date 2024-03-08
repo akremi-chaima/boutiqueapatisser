@@ -1,0 +1,8 @@
+App\DTO\Order\OrderFilterDTO:
+  properties:
+    userName:
+      - Type: string
+    statusId:
+      - Type: integer
+    date:
+      - Date: ~

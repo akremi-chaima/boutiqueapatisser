@@ -36,7 +36,7 @@ class GetUserController extends AbstractController
      *
      * @OA\Tag(name="Users")
      *
-     * @OA\Response(response=200, description="User")
+     * @OA\Response(response=200, description="User details")
      *
      * @param UserInterface $user
      * @return JsonResponse

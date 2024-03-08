@@ -11,6 +11,11 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class OrderStatus
 {
+    const WAITING_FOR_VALIDATION = 'En attente de validation';
+    const IN_PREPARATION = 'En cours de préparation';
+    const AWAITING_DELIVERY = 'En attente de livraison';
+    const PAID = 'Payée';
+
     /**
      * @var int
      *

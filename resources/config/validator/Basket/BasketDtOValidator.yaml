@@ -1,5 +1,0 @@
-App\DTO\Basket\BasketDTO:
-  properties:
-    pastries:
-      - Type: array
-      - NotBlank: ~

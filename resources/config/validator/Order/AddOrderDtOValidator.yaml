@@ -1,8 +1,0 @@
-App\DTO\Order\OrderDTO:
-  properties:
-    userId:
-      - Type: integer
-      - NotBlank: ~
-    orderStatusId:
-      - Type: integer
-      - NotBlank: ~

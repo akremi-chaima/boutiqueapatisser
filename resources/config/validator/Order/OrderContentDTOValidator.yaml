@@ -1,0 +1,10 @@
+App\DTO\Order\OrderContentDTO:
+  properties:
+    quantity:
+      - Type: integer
+      - NotBlank: ~
+    pastryId:
+      - Type: integer
+      - NotBlank: ~
+    formatId:
+      - Type: integer

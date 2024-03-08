@@ -1,0 +1,5 @@
+App\DTO\Order\OrderDTO:
+  properties:
+    pastries:
+      - Type: array
+      - NotBlank: ~

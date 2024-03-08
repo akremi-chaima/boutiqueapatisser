@@ -1,8 +1,0 @@
-App\DTO\Category\CategoryDTO:
-  properties:
-    name:
-      - Type: string
-      - NotBlank: ~
-    isActive:
-      - Type: boolean
-      - NotBlank: ~

@@ -2,7 +2,10 @@
 
 namespace App\Manager;
 
+use App\DTO\Order\OrderFilterDTO;
 use App\Entity\Order;
+use App\Entity\OrderStatus;
+use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 
 /**
@@ -18,6 +21,42 @@ class OrderManager extends AbstractManager
     public function __construct(EntityManagerInterface $managerInterface)
     {
         parent::__construct($managerInterface, Order::class);
+    }
+
+    /**
+     * @param OrderFilterDTO|null $dto
+     * @param int|null $userId
+     * @return float|int|mixed[]|string
+     */
+    public function get(OrderFilterDTO $dto = null, int $userId = null)
+    {
+        $queryBuilder =  $this->getEntityManager()->createQueryBuilder()
+            ->select('ord.id, ord.createdAt, user.firstName, user.lastName, user.email, user.phoneNumber, orderStatus.name')
+            ->from(Order::class, 'ord')
+            ->join(OrderStatus::class, 'orderStatus', 'WITH', 'orderStatus = ord.orderStatus')
+            ->join(User::class, 'user', 'WITH', 'user = ord.user');
+
+        if (!empty($dto->getStatusId())) {
+            $queryBuilder->andWhere('orderStatus.id = :statusId')
+                ->setParameter(':statusId', $dto->getStatusId());
+        }
+
+        if (!empty($dto->getUserName())) {
+            $queryBuilder->andWhere('user.lastName LIKE :userName or user.firstName LIKE :userName')
+                ->setParameter(':userName', '%'.$dto->getUserName().'%');
+        }
+
+        if (!empty($dto->getDate())) {
+            $queryBuilder->andWhere('ord.createdAt LIKE :createdAt')
+                ->setParameter(':createdAt', '%'.$dto->getDate().'%');
+        }
+
+        if (!empty($userId)) {
+            $queryBuilder->andWhere('user.id = :userId')
+                ->setParameter(':userId', $userId);
+        }
+
+        return $queryBuilder->getQuery()->getArrayResult();
     }
 
     /**
