@@ -37,12 +37,12 @@ class UpdateOrderStatusController extends AbstractController
     /**
      * Update order status
      *
-     * @Route("/api/private/customer/order/{id}/{statusId}", methods={"PUT"})
+     * @Route("/api/private/update/order/status/{id}/{statusId}", methods={"PUT"})
      *
      * @OA\Tag(name="Orders")
      *
      * @OA\Response(response=200, description="Update order status")
-     * @OA\Response(response=400, description="The user should be administrator | Order was not found | Status was not found")
+     * @OA\Response(response=400, description="Order was not found | Status was not found | The order can\'t be updated | Invalid status")
      *
      * @param UserInterface $user
      * @param int $id
@@ -51,10 +51,6 @@ class UpdateOrderStatusController extends AbstractController
      */
     public function __invoke(UserInterface $user, int $id, int $statusId): JsonResponse
     {
-        if ($user->getRoles()[0] !== Role::ROLE_ADMINISTRATOR) {
-            return new JsonResponse(['error_message' => 'The user should be administrator'], Response::HTTP_BAD_REQUEST);
-        }
-
         /** @var Order|null $order */
         $order = $this->orderManager->findOneBy(['id' => $id]);
         if (empty($order)) {
@@ -65,6 +61,16 @@ class UpdateOrderStatusController extends AbstractController
         $status = $this->orderStatusManager->findOneBy(['id' => $statusId]);
         if (empty($status)) {
             return new JsonResponse(['error_message' => 'Status was not found'], Response::HTTP_BAD_REQUEST);
+        }
+
+        // customer can't update order if the status is different then waiting for validation
+        if ($user->getRoles()[0] == Role::ROLE_CUSTOMER && $order->getOrderStatus()->getName() !== OrderStatus::WAITING_FOR_VALIDATION) {
+            return new JsonResponse(['error_message' => 'The order can\'t be updated'], Response::HTTP_BAD_REQUEST);
+        }
+
+        // customer can only cancel the order
+        if ($user->getRoles()[0] == Role::ROLE_CUSTOMER && $status->getName() !== OrderStatus::CANCELED) {
+            return new JsonResponse(['error_message' => 'Invalid status'], Response::HTTP_BAD_REQUEST);
         }
 
         $order->setOrderStatus($status);

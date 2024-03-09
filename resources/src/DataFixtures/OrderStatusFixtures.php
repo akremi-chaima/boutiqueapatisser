@@ -15,6 +15,7 @@ class OrderStatusFixtures extends Fixture
             OrderStatus::IN_PREPARATION,
             OrderStatus::AWAITING_DELIVERY,
             OrderStatus::PAID,
+            OrderStatus::CANCELED,
         ];
 
         foreach ($ordersStatus as $orderStatusName) {

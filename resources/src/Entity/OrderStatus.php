@@ -15,6 +15,7 @@ class OrderStatus
     const IN_PREPARATION = 'En cours de préparation';
     const AWAITING_DELIVERY = 'En attente de livraison';
     const PAID = 'Payée';
+    const CANCELED = 'Annulée';
 
     /**
      * @var int
