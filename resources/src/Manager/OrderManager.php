@@ -31,7 +31,7 @@ class OrderManager extends AbstractManager
     public function get(OrderFilterDTO $dto = null, int $userId = null)
     {
         $queryBuilder =  $this->getEntityManager()->createQueryBuilder()
-            ->select('ord.id, ord.createdAt, user.firstName, user.lastName, user.email, user.phoneNumber, orderStatus.name')
+            ->select('ord.id, ord.createdAt, user.firstName, user.lastName, user.email, user.phoneNumber, orderStatus.name as status')
             ->from(Order::class, 'ord')
             ->join(OrderStatus::class, 'orderStatus', 'WITH', 'orderStatus = ord.orderStatus')
             ->join(User::class, 'user', 'WITH', 'user = ord.user');
