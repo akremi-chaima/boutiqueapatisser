@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Address;
+namespace App\Controller\User;
 
 use App\Manager\AddressManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -30,7 +30,7 @@ class GetAddressController extends AbstractController
     }
 
     /**
-     * Get address by id
+     * Get address
      *
      * @Route("/api/private/address", methods={"GET"})
      *
@@ -43,7 +43,7 @@ class GetAddressController extends AbstractController
      */
     public function __invoke(UserInterface $user): JsonResponse
     {
-        $address = $this->addressManager->findOneBy(['id' => $user->getId()]);
+        $address = $this->addressManager->findOneBy(['user' => $user]);
         if(is_null($address)){
             return new JsonResponse(['error_message' => 'The address is not found'], Response::HTTP_BAD_REQUEST);
         }

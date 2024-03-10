@@ -14,12 +14,13 @@ class UpdateUserDenormalizer implements DenormalizerInterface
     public function denormalize($data, $class, $format = null, array $context = [])
     {
         return (new UpdateUserDTO())
-            ->setId($data['id'] ?? null)
             ->setFirstName($data['firstName'] ?? null)
             ->setLastName($data['lastName'] ?? null)
-            ->setPassword($data['password'] ?? null)
             ->setEmail($data['email'] ?? null)
-            ->setPhoneNumber($data['phoneNumber'] ?? null);
+            ->setPhoneNumber($data['phoneNumber'] ?? null)
+            ->setCity($data['city'] ?? null)
+            ->setZipCode($data['zipCode'] ?? null)
+            ->setStreet($data['street'] ?? null);
     }
 
     /**

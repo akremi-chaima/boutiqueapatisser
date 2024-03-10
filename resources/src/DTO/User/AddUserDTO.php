@@ -3,7 +3,6 @@
 namespace App\DTO\User;
 class AddUserDTO
 {
-
     /**
      * @inheritdoc
      */
@@ -18,7 +17,6 @@ class AddUserDTO
      * @inheritdoc
      */
     private $phoneNumber;
-
 
     /**
      * @inheritdoc
@@ -188,5 +186,4 @@ class AddUserDTO
         $this->street = $street;
         return $this;
     }
-
 }

@@ -36,17 +36,17 @@ class OrderManager extends AbstractManager
             ->join(OrderStatus::class, 'orderStatus', 'WITH', 'orderStatus = ord.orderStatus')
             ->join(User::class, 'user', 'WITH', 'user = ord.user');
 
-        if (!empty($dto->getStatusId())) {
+        if ($dto && !empty($dto->getStatusId())) {
             $queryBuilder->andWhere('orderStatus.id = :statusId')
                 ->setParameter(':statusId', $dto->getStatusId());
         }
 
-        if (!empty($dto->getUserName())) {
+        if ($dto && !empty($dto->getUserName())) {
             $queryBuilder->andWhere('user.lastName LIKE :userName or user.firstName LIKE :userName')
                 ->setParameter(':userName', '%'.$dto->getUserName().'%');
         }
 
-        if (!empty($dto->getDate())) {
+        if ($dto && !empty($dto->getDate())) {
             $queryBuilder->andWhere('ord.createdAt LIKE :createdAt')
                 ->setParameter(':createdAt', '%'.$dto->getDate().'%');
         }

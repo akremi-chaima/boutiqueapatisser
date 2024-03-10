@@ -1,4 +1,4 @@
-App\DTO\User\UserDTO:
+App\DTO\User\AddUserDTO:
   properties:
     firstName:
       - Type: string
