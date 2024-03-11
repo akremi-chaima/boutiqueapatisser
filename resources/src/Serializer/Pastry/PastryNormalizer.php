@@ -63,7 +63,7 @@ class PastryNormalizer  implements NormalizerInterface
             'flavour' => $this->flavourNormalizer->normalize($pastry->getFlavour()),
             'category' => $this->categoryNormalizer->normalize($pastry->getCategory()),
             'subCollection' => $this->subCollectionNormalizer->normalize($pastry->getSubCollection()),
-            'picture' => $pastry->getPicture(),
+            'picture' => '/uploads/'.$pastry->getId().'/'.$pastry->getPicture(),
             'formats' => $formats,
         ];
     }
