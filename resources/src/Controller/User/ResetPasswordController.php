@@ -55,7 +55,7 @@ class ResetPasswordController extends AbstractController
     {
         // Get active user by email
         /** @var User|null $user */
-        $user = $this->userManager->findOneBy(['email' => $email, 'active' => true]);
+        $user = $this->userManager->findOneBy(['email' => $email]);
         if (empty($user)) {
             return new JsonResponse(['error_message' => 'The user was not found'], Response::HTTP_BAD_REQUEST);
         }
