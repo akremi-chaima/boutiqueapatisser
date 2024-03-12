@@ -15,7 +15,7 @@ class AddOrderContentDenormalizer implements DenormalizerInterface
         return (new AddOrderContentDTO())
             ->setQuantity($data['quantity'] ?? null)
             ->setPastryId($data['pastryId'] ?? null)
-            ->setFormatId($data['formatId'] ?? null);
+            ->setFormatName($data['formatName'] ?? null);
     }
 
     /**

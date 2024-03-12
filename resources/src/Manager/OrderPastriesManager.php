@@ -35,7 +35,7 @@ class OrderPastriesManager extends AbstractManager
             ->join(Pastry::class, 'pastry', 'WITH', 'pastry = op.pastry')
             ->join(Order::class, 'ord', 'WITH', 'ord = op.order')
             ->leftJoin(Format::class, 'pastryFormat', 'WITH', 'pastryFormat = op.format')
-            ->where('op.id = :orderId')
+            ->where('ord.id = :orderId')
             ->setParameter(':orderId', $orderId)
             ->getQuery()->getArrayResult();
     }

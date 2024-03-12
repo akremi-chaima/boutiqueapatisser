@@ -94,7 +94,7 @@ class AddOrderController extends AbstractController
      *              required={"quantity", "pastryId"},
      *              @OA\Property(property="quantity", type="intger"),
      *              @OA\Property(property="pastryId", type="intger"),
-     *              @OA\Property(property="formatId", type="intger")
+     *              @OA\Property(property="formatName", type="string")
      *          )
      *      )
      * )
@@ -129,7 +129,6 @@ class AddOrderController extends AbstractController
         foreach ($dto->getPastries() as $item) {
             /** @var AddOrderContentDTO  $basketContentDTO */
             $basketContentDTO = $this->serializer->deserialize(json_encode($item), AddOrderContentDTO::class, 'json');
-
             $errors = $this->validator->validate($basketContentDTO);
 
             if ($errors->count()) {
@@ -140,11 +139,11 @@ class AddOrderController extends AbstractController
                 return new JsonResponse(['error_messages' => $display], Response::HTTP_BAD_REQUEST);
             }
 
-            $pastry = $this->pastryManager->findOneBy(['id' => $item->getPastryId()]);
-            $format= $this->formatManager->findOneBy(['id' => $item->getFormatId()]);
+            $pastry = $this->pastryManager->findOneBy(['id' => $basketContentDTO->getPastryId()]);
+            $format= $this->formatManager->findOneBy(['name' => $basketContentDTO->getFormatName()]);
             if (!empty($pastry) && !empty($format)) {
                 $orderPastries[] = (new OrderPastries())
-                    ->setQuantity($item->getQuantity())
+                    ->setQuantity($basketContentDTO->getQuantity())
                     ->setPastry($pastry)
                     ->setFormat($format);
             }

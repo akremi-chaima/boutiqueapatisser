@@ -16,7 +16,7 @@ class AddOrderContentDTO
     /**
      * @inheritdoc
      */
-    private $formatId;
+    private $formatName;
 
     /**
      * @return mixed
@@ -57,18 +57,18 @@ class AddOrderContentDTO
     /**
      * @return mixed
      */
-    public function getFormatId()
+    public function getFormatName()
     {
-        return $this->formatId;
+        return $this->formatName;
     }
 
     /**
-     * @param mixed $formatId
+     * @param mixed $formatName
      * @return AddOrderContentDTO
      */
-    public function setFormatId($formatId)
+    public function setFormatName($formatName)
     {
-        $this->formatId = $formatId;
+        $this->formatName = $formatName;
         return $this;
     }
 }

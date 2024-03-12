@@ -6,5 +6,5 @@ App\DTO\Order\AddOrderContentDTO:
     pastryId:
       - Type: integer
       - NotBlank: ~
-    formatId:
-      - Type: integer
+    formatName:
+      - Type: string
