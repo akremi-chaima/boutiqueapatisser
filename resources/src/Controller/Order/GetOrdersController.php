@@ -95,6 +95,7 @@ class GetOrdersController extends AbstractController
         $result = [];
         $orders = $this->orderManager->get($dto);
         foreach ($orders as $order) {
+            $order['createdAt'] = $order['createdAt']->format('d/m/Y H:i');
             $result[] = array_merge($order, ['content' => $this->orderPastriesManager->get($order['id'])]);
         }
 
