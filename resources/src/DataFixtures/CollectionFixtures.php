@@ -11,8 +11,8 @@ class CollectionFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         $collections = [
-        'collection saisonnière',
-        'collection permanente',
+        'Collection saisonnière',
+        'Collection permanente',
     ];
 
         foreach ($collections as $collectionName) {

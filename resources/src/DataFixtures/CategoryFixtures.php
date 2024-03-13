@@ -11,10 +11,11 @@ class CategoryFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         $categories = [
-            'vinneoiserie',
-            'gateau',
-            'biscuit',
-            'chocolat et bonbons'
+            'Viennoiserie',
+            'Patisserie',
+            'Biscuit',
+            'Chocolat et bonbons',
+            'Entremets'
         ];
 
         foreach ($categories as $categoryName) {

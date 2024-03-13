@@ -12,12 +12,12 @@ class SubCollectionFixtures extends Fixture implements DependentFixtureInterface
     public function load(ObjectManager $manager): void
     {
         $subCollections = [
-        'collection saisonnière' => [
-            'Pistache pistache' , 'La Fleur vanille'
+        'Collection saisonnière' => [
+            'Créations de saison'
 
         ],
-        'collection permanente' => [
-            'Le cheesecake', 'Tarte Citron Meringuée', 'Les intemporelle', 'Gateaux de voyage'
+        'Collection permanente' => [
+            'Les intemporelles', 'Gateaux de voyage', 'Collection gourmandises', 'Chocolat et Bonbons'
 
         ],
     ];

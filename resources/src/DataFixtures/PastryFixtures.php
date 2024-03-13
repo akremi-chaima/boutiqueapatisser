@@ -12,9 +12,60 @@ class PastryFixtures extends Fixture implements DependentFixtureInterface
     public function load(ObjectManager $manager): void
     {
         $pastries = [
-        ['name' => 'cookie pistachio', 'price' => 12, 'description' => 'un bon cookie traditionnel au pistache', 'isVisible' => true, 'category' => 'biscuit', 'subCollection' => 'Pistache pistache', 'flavour' => 'pistache'],
-        ['name' => 'cake marbré', 'price' => 20, 'description' => 'Mi chocolat – mi nature, en toute simplicité, confectionné avec de bons ingrédients', 'isVisible' => true, 'category' => 'gateau', 'subCollection' => 'Gateaux de voyage', 'flavour' => 'chocolat'],
-        ['name' => 'noisette gourmande', 'price' => 7.50, 'description' => 'Noisette Gourmande dans une nouvelle version tellement réconfortante avec son coeur praliné ultra fondant aussi régressif qu’addictif', 'isVisible' => true, 'category' => 'gateau', 'subCollection' => 'Les intemporelle', 'flavour' => 'noisette'],
+        [
+            'name' => 'Cookies chocolat blanc pistaches',
+            'price' => 2.9,
+            'description' => 'Deux saveurs pour ce grand classique apprécié à toute heure par les petits comme les grands gourmands ! Découvrez notre nouvelle version qui associe chocolat blanc et pistaches.',
+            'isVisible' => true,
+            'category' => 'Biscuit',
+            'subCollection' => 'Gateaux de voyage',
+            'flavour' => 'Pistache'
+        ],
+        [
+            'name' => 'Cake marbré',
+            'price' => 20,
+            'description' => 'Mi chocolat – mi nature, en toute simplicité, confectionné avec de bons ingrédients, ce marbré très fondant est le gâteau à partager qui réunit les petits et les grands à l’heure du goûter.',
+            'isVisible' => true,
+            'category' => 'Patisserie',
+            'subCollection' => 'Gateaux de voyage',
+            'flavour' => 'Chocolat'
+        ],
+        [
+            'name' => 'Le cheesecake',
+            'price' => 32,
+            'description' => 'Un cheesecake à fondre de plaisir ! Tous les goûts du gâteau traditionnel magnifiés par de beaux produits français sélectionnés avec amour ! La saveur légèrement épicée d’un sablé croustillant. Et un jeu de texture avec la fraîcheur aérienne d’une mousse au fromage frais parfumée aux zestes de citron qui renferme un coeur fondant.',
+            'isVisible' => true,
+            'category' => 'Patisserie',
+            'subCollection' => 'Les intemporelles',
+            'flavour' => 'Noisette'
+        ],
+        [
+            'name' => 'Noisette gourmande',
+            'price' => 7.5,
+            'description' => 'Retrouver les marqueurs de notre Noisette Gourmande dans une nouvelle version tellement réconfortante avec son coeur praliné ultra fondant aussi régressif qu’addictif !',
+            'isVisible' => true,
+            'category' => 'Entremets',
+            'subCollection' => 'Créations de saison',
+            'flavour' => 'Noisette'
+        ],
+        [
+            'name' => 'Chausson aux pommes',
+            'price' => 2.6,
+            'description' => 'Une délicieuse pâtisserie composée d\'une fine couche de pâte feuilletée, enveloppant généreusement une garniture de compote de pommes sucrée et parfumée à la cannelle, saupoudré de sucre glace pour une touche de douceur supplémentaire.',
+            'isVisible' => true,
+            'category' => 'Viennoiserie',
+            'subCollection' => 'Collection gourmandises',
+            'flavour' => 'Pommes'
+        ],
+        [
+            'name' => 'Noisettes et amandes au chocolat',
+            'price' => 9.5,
+            'description' => 'Assortiment chocolaté très gourmand à croquer sans modération entre noisettes et amandes enrobées de chocolat végétal aux saveurs intense, lactée ou caramel selon les bonbons',
+            'isVisible' => true,
+            'category' => 'Chocolat et bonbons',
+            'subCollection' => 'Chocolat et Bonbons',
+            'flavour' => 'Chocolat'
+        ],
     ];
 
         foreach ($pastries as $pastryDetails) {

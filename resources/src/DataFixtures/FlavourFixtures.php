@@ -11,10 +11,11 @@ class FlavourFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         $flavours = [
-        'fraise',
-        'noisette',
-        'pistache',
-        'chocolat'
+        'Fraise',
+        'Noisette',
+        'Pistache',
+        'Chocolat',
+        'Pommes'
     ];
 
         foreach ($flavours as $flavourName) {

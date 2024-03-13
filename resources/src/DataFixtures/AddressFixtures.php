@@ -12,8 +12,8 @@ class AddressFixtures extends Fixture implements DependentFixtureInterface
     public function load(ObjectManager $manager): void
     {
         $addresses = [
-        ['city' => 'marseille', 'zipCode' => '13002', 'street' => '26 rue chevallier Paul', 'user' => 'chayma.akermi1997@gmail.com'],
-        ['city' => 'paris', 'zipCode' => '75004', 'street' => '30 rue Paul', 'user' => 'chaima.akremi.1997@gmail.com'],
+        ['city' => 'Marseille', 'zipCode' => '13002', 'street' => '26 rue chevallier Paul', 'user' => 'chayma.akermi1997@gmail.com'],
+        ['city' => 'Paris', 'zipCode' => '75004', 'street' => '30 rue Paul', 'user' => 'chaima.akremi.1997@gmail.com'],
     ];
 
         foreach ($addresses as $addressDetails) {
