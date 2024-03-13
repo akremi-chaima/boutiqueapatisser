@@ -12,7 +12,7 @@ class FormatFixtures extends Fixture implements DependentFixtureInterface
     public function load(ObjectManager $manager): void
     {
         $formats = [
-        'Cookies chocolat blanc pistaches' => [
+        'Cookies choco pistaches' => [
             'individuel'
         ],
         'Cake marbré' => [
@@ -27,9 +27,15 @@ class FormatFixtures extends Fixture implements DependentFixtureInterface
         'Chausson aux pommes' => [
             'individuel'
         ],
-        'Noisettes et amandes au chocolat' => [
+        'Noisettes au chocolat' => [
             'individuel','4 personnes', '6 personnes', '8 personnes'
         ],
+        'Tarte citron meringuée' => [
+            '4 personnes', '6 personnes', '8 personnes'
+        ],
+        'Boîtes de chocolats' => [
+            '6 personnes', '8 personnes', '12 personnes'
+        ]
     ];
 
         foreach ($formats as $pastryName => $formatsName) {

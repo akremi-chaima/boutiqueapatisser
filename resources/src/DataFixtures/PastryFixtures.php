@@ -13,7 +13,7 @@ class PastryFixtures extends Fixture implements DependentFixtureInterface
     {
         $pastries = [
         [
-            'name' => 'Cookies chocolat blanc pistaches',
+            'name' => 'Cookies choco pistaches',
             'price' => 2.9,
             'description' => 'Deux saveurs pour ce grand classique apprécié à toute heure par les petits comme les grands gourmands ! Découvrez notre nouvelle version qui associe chocolat blanc et pistaches.',
             'isVisible' => true,
@@ -58,9 +58,27 @@ class PastryFixtures extends Fixture implements DependentFixtureInterface
             'flavour' => 'Pommes'
         ],
         [
-            'name' => 'Noisettes et amandes au chocolat',
+            'name' => 'Noisettes au chocolat',
             'price' => 9.5,
             'description' => 'Assortiment chocolaté très gourmand à croquer sans modération entre noisettes et amandes enrobées de chocolat végétal aux saveurs intense, lactée ou caramel selon les bonbons',
+            'isVisible' => true,
+            'category' => 'Chocolat et bonbons',
+            'subCollection' => 'Chocolat et Bonbons',
+            'flavour' => 'Chocolat'
+        ],
+        [
+            'name' => 'Tarte citron meringuée',
+            'price' => 25,
+            'description' => 'Citron yuzu pour le crémeux, zestes en fonction de l’arrivage : cette tarte invite à découvrir les saveurs subtiles d’agrumes d’exception. Un mariage délicat entre la puissance du fruit et la douceur de la meringue',
+            'isVisible' => true,
+            'category' => 'Entremets',
+            'subCollection' => 'Les intemporelles',
+            'flavour' => 'Citron'
+        ],
+        [
+            'name' => 'Boîtes de chocolats',
+            'price' => 22,
+            'description' => 'Dans leur joli écrin à offrir comme pour se faire plaisir, découvrez les six saveurs de nos douceurs enrobées de chocolat noir ou de chocolat au lait entre ganaches, pralinés et coeur coulant caramel.',
             'isVisible' => true,
             'category' => 'Chocolat et bonbons',
             'subCollection' => 'Chocolat et Bonbons',

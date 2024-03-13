@@ -15,7 +15,8 @@ class FlavourFixtures extends Fixture
         'Noisette',
         'Pistache',
         'Chocolat',
-        'Pommes'
+        'Pommes',
+        'Citron'
     ];
 
         foreach ($flavours as $flavourName) {
